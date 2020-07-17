@@ -64,10 +64,10 @@
             for (var i =0; i<data.length; i++) {
                 var listGroupItem = $("<li class='list-group-item'>");
 
-                listGroupItem.append($("<h2>").text("Name: " + data[i].reserve-name));
+                listGroupItem.append($("<h2>").text("Name: " + data[i].name));
                 listGroupItem.append($("<h3>").text("id: " + data[i].id));
-                listGroupItem.append($("<h3>").text("email: " + data[i].reserve-email));
-                listGroupItem.append($("<h3>").text("Phone:" + data[i].reserve-phone));
+                listGroupItem.append($("<h3>").text("email: " + data[i].email));
+                listGroupItem.append($("<h3>").text("Phone:" + data[i].phone));
 
                 $("#reservations").append(listGroupItem);
 
