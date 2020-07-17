@@ -16,21 +16,23 @@ let waitlist = [];
 
 
 app.get("/tables", function(req, res) {
-    res.sendFile(path.join(__dirname,"table.html"))
+    res.sendFile(path.join(__dirname,"/public/tables.html"))
    
 });
 app.get("/api/tables", function(req, res) {
     res.end(tables);
 });
 app.get("/reserve", function(req, res){
-    res.sendFile(path.join(__dirname,"reserve.html"))
+    res.sendFile(path.join(__dirname,"/public/reserve.html"))
 });
 app.post("/api/reserve", function(req, res) {
    var newReservation = req.body;
    if(tables.length < 5){
        tables.push(newReservation);
+       res.end("table reserved");
    }else{
        waitlist.push(newReservation);
+       res.end("waitlist");
    }
 });
 app.get("*", function(req, res) {
