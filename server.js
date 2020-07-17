@@ -9,6 +9,8 @@ app.use(express.json());
 
 app.use(express.static(__dirname + "/public"));
 
+let tables = [];
+let waitlist = [];
 
 
 function handleRequest(fileName, res){ 
@@ -24,11 +26,7 @@ app.get("/notes", function(req, res) {
     handleRequest("notes.html",res)
 });
 app.get("/api/notes", function(req, res) {
-    fs.readFile(__dirname + "/db/db.json", function(err,data) {
-        if (err) throw err;
-        
-        res.json(JSON.parse(data));
-      });
+    res.end(tables);
 });
     
 app.get("*", function(req, res) {
