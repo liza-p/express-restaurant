@@ -43,6 +43,10 @@
         console.log(data);
         if (data) {
           $("#reservations").show();
+          $("#reservations").show();
+
+          var table = $("<li>");
+            
         //   $("#name").text(data.name);
         //   $("#role").text(data.role);
         //   $("#age").text(data.age);
@@ -51,6 +55,7 @@
         else {
        //   $("#empty").text("The force is not strong with this one. Your character was not found.");
           $("#reservations").hide();
+          $("#empty").show();
         }
       });
 
