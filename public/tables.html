@@ -20,11 +20,29 @@
       
       <h3>These are the tables that are already reserved</h3>
       <hr>
-      <a href="/all"><button class="btn btn-danger btn-lg"><span class="fa fa-th-list"></span> Make Reservation</button></a>
+      <a href="/reserve"><button class="btn btn-danger btn-lg"><span class="fa fa-th-list"></span> Make Reservation</button></a>
     </div>
    
-    <div id="reservations">
+    <div class="card">
+        <div class="card-header">
+          <h4>Current Reservations</h4>
+        </div>
+        <div class="card-body">
+          <ul id="tableList" class="list-group" id="reservations">
+              
+        </ul>
+        </div>
+      </div>
 
+    <div id="waitlist">
+        <div class="card-header">
+            <h4>Wait List</h4>
+          </div>
+          <div class="card-body" id="waitlist">
+            <ul id="tableList" class="list-group" id="reservations">
+                
+          </ul>
+          </div>
     </div>
     <div id="empty">
         All of our tables are open for reservations.
@@ -33,20 +51,27 @@
   </div>
   <footer class="footer">
     <div class="container">
-      <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a>
+      <p><a href="/api/tables">API Table Link</a> | <a href="/api/reserve">API Wait List</a>
     </p></div>
   </footer>
 
   <script type="text/javascript">
  
       $.get("/api/tables/" , function(data) {
-        console.log(data);
+        //console.log(data);
         if (data) {
-          $("#reservations").show();
-          $("#reservations").show();
 
-          var table = $("<li>");
-            
+            for (var i =0; i<data.length; i++) {
+                var listGroupItem = $("<li class='list-group-item'>");
+
+                listGroupItem.append($("<h2>").text("Name: " + data[i].name));
+                listGroupItem.append($("<h3>").text("id: " + data[i].id));
+                listGroupItem.append($("<h3>").text("email: " + data[i].email));
+                listGroupItem.append($("<h3>").text("Phone:" + data[i].phone));
+
+                $("#reservations").append(listGroupItem);
+
+            }
         //   $("#name").text(data.name);
         //   $("#role").text(data.role);
         //   $("#age").text(data.age);
@@ -54,7 +79,7 @@
         }
         else {
        //   $("#empty").text("The force is not strong with this one. Your character was not found.");
-          $("#reservations").hide();
+     
           $("#empty").show();
         }
       });
