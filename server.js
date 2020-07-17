@@ -13,24 +13,29 @@ let tables = [];
 let waitlist = [];
 
 
-function handleRequest(fileName, res){ 
-    fs.readFile(__dirname + "/public/" + fileName, function(err, data) {
-        if (err) throw err;
-        
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(data);
-      });
-}
 
-app.get("/notes", function(req, res) {
-    handleRequest("notes.html",res)
+
+app.get("/tables", function(req, res) {
+    res.sendFile(path.join(__dirname,"table.html"))
+   
 });
-app.get("/api/notes", function(req, res) {
+app.get("/api/tables", function(req, res) {
     res.end(tables);
 });
-    
+app.get("/reserve", function(req, res){
+    res.sendFile(path.join(__dirname,"reserve.html"))
+});
+app.post("/api/reserve", function(req, res) {
+   var newReservation = req.body;
+   if(tables.length < 5){
+       tables.push(newReservation);
+   }else{
+       waitlist.push(newReservation);
+   }
+});
 app.get("*", function(req, res) {
-    handleRequest("index.html",res)
+    res.sendFile(path.join(__dirname,"index.html"))
+    
 });
 
 
